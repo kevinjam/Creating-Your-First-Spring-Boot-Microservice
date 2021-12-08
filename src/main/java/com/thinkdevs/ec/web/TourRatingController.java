@@ -109,6 +109,18 @@ public class TourRatingController {
         return new RatingDto(tourRatingRepository.save(rating));
     }
 
+    /**
+     * Delete a Rating of a tour made by a customer
+     *
+     * @param tourId tour identifier
+     * @param customerId customer identifier
+     */
+    @DeleteMapping(path = "/{customerId}")
+    public void delete(@PathVariable(value = "tourId") int tourId, @PathVariable(value = "customerId") int customerId) {
+        TourRating rating = verifyTourRating(tourId, customerId);
+        tourRatingRepository.delete(rating);
+    }
+
 
     /**
      * Verify and return the Tour given a tourId.
