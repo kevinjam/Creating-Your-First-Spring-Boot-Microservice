@@ -6,12 +6,16 @@ import com.thinkdevs.ec.domain.TourRatingPk;
 import com.thinkdevs.ec.repo.TourRatingRepository;
 import com.thinkdevs.ec.repo.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Tour Rating Controller
@@ -45,6 +49,25 @@ public class TourRatingController {
         Tour tour = verifyTour(tourId);
         tourRatingRepository.save(new TourRating( new TourRatingPk(tour, ratingDto.getCustomerId()),
                 ratingDto.getScore(), ratingDto.getComment()));
+    }
+
+    /**
+     * Lookup a page of Ratings for a tour.
+     *
+     * @param tourId Tour Identifier
+     * @param pageable paging details
+     * @return Requested page of Tour Ratings as RatingDto's
+     */
+    @GetMapping
+    public Page<RatingDto> getRatings(@PathVariable(value = "tourId") int tourId,
+                                      Pageable pageable){
+        verifyTour(tourId);
+        Page<TourRating> ratings = tourRatingRepository.findByPkTourId(tourId, pageable);
+        return new PageImpl<>(
+                ratings.get().map(RatingDto::new).collect(Collectors.toList()),
+                pageable,
+                ratings.getTotalElements()
+        );
     }
 
     /**
