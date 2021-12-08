@@ -74,6 +74,42 @@ public class TourRatingController {
                 new NoSuchElementException("Tour-Rating pair for request("
                         + tourId + " for customer" + customerId));
     }
+
+    /**
+     * Update score and comment of a Tour Rating
+     *
+     * @param tourId tour identifier
+     * @param ratingDto rating Data Transfer Object
+     * @return The modified Rating DTO.
+     */
+    @PutMapping
+    public RatingDto updateWithPut(@PathVariable(value = "tourId") int tourId,
+                                   @RequestBody @Validated RatingDto ratingDto) {
+        TourRating rating = verifyTourRating(tourId, ratingDto.getCustomerId());
+        rating.setScore(ratingDto.getScore());
+        rating.setComment(ratingDto.getComment());
+        return new RatingDto(tourRatingRepository.save(rating));
+    }
+    /**
+     * Update score or comment of a Tour Rating
+     *
+     * @param tourId tour identifier
+     * @param ratingDto rating Data Transfer Object
+     * @return The modified Rating DTO.
+     */
+    @PatchMapping
+    public RatingDto updateWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
+        TourRating rating = verifyTourRating(tourId, ratingDto.getCustomerId());
+        if (ratingDto.getScore() != null) {
+            rating.setScore(ratingDto.getScore());
+        }
+        if (ratingDto.getComment() != null) {
+            rating.setComment(ratingDto.getComment());
+        }
+        return new RatingDto(tourRatingRepository.save(rating));
+    }
+
+
     /**
      * Verify and return the Tour given a tourId.
      *
