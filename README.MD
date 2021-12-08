@@ -1,6 +1,7 @@
 # Getting Started
 
 ### Reference Documentation
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
@@ -11,6 +12,7 @@ For further reference, please consider the following sections:
 * [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.6.1/reference/htmlsingle/#boot-features-jpa-and-spring-data)
 
 ### Guides
+
 The following guides illustrate how to use some features concretely:
 
 * [Accessing JPA Data with REST](https://spring.io/guides/gs/accessing-data-rest/)
@@ -21,16 +23,16 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
 
-
 ### Learning objectives
+
 * Setting up the project
-Building, deploying, and launching the microservice
-Declaring Spring Data JPA repository interfaces
-Invoking repositories
-Using Spring Data query methods
-Exposing RESTful APIs with Spring Data REST
-Using the /search resource to invoke query methods
-Paging and sorting
-Declaring a new RESTController
-Creating HTTP methods for updating and deleting data
-Migrating microservices to a MongoDB repository
+    * Building, deploying, and launching the microservice
+      *Declaring Spring Data JPA repository interfaces
+      *Invoking repositories
+      *Using Spring Data query methods
+      *Exposing RESTful APIs with Spring Data REST
+      *Using the /search resource to invoke query methods
+      *Paging and sorting
+      *Declaring a new RESTController
+      *Creating HTTP methods for updating and deleting data
+      *Migrating microservices to a MongoDB repository
